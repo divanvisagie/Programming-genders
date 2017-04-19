@@ -39,7 +39,7 @@ const countedData = data
    // console.log(arrData)
 
     const filteredArray = arrData.filter(x => {
-        return (["Scala","C#"].includes(x.language))
+        return (["Scala","C#","Java"].includes(x.language))
     })
 
     console.log(filteredArray)

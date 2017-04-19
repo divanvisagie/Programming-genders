@@ -46,13 +46,23 @@ object Hello {
       .map(line => line.split(","))
       .map(columns => {
         (columns(0),columns(1),columns(2))
-      })
+      }).toArray
+
+    //println(filteredData)
 
 
-    println(s"Filtered pure data contains: ${filteredData.length} participants")
 
 
     bufferedSource.close
+
+    val dataArray = filteredData.map(x => List(ProgrammerCount("Women",x._1,x._3.toInt), ProgrammerCount("Men",x._1,x._2.toInt)))
+      .flatten
+
+
+    val dataset = graphDataSetFromCount(dataArray)
+    drawBarGraph(dataset)
+
+    println(s"Filtered pure data contains: ${filteredData.length} participants")
   }
 
   def main(args: Array[String]): Unit = {
