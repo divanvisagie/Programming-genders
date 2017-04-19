@@ -36,22 +36,18 @@ object Hello {
 
 
   def readCsvManually: Unit = {
-    var bufferedSource = io.Source.fromResource("2016_StackOverflow_Data.csv")
+    var bufferedSource = io.Source.fromResource("genderlang.csv")
 
-    val filteredData = bufferedSource.getLines().drop(1)
-      .filter(x => x.indexOf(",,") < 0)
+    val filteredData = bufferedSource.getLines()
       .map(x => {
         println(x)
         x
       })
       .map(line => line.split(","))
       .map(columns => {
-        (columns(7),columns(16),columns(17))
+        (columns(0),columns(1),columns(2))
       })
-//      .map(x => {
-//        println(s"${x._1} | ${x._2} | ${x._3}")
-//        x
-//      })
+
 
     println(s"Filtered pure data contains: ${filteredData.length} participants")
 
@@ -60,8 +56,9 @@ object Hello {
   }
 
   def main(args: Array[String]): Unit = {
-//     demoBar
-    readCsvManually
+   readCsvManually
+
+
 
     //val result = Parser.parse[Person](csv)
   }

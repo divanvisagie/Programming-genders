@@ -1,0 +1,14 @@
+{
+  "name": "programming-genders",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:divanvisagie/Programming-genders.git",
+  "author": "Divan Visagie <me@dvisagie.com>",
+  "license": "MIT",
+  "scripts" : {
+    "process": "csvtojson ./src/main/resources/2016_StackOverflow_Data.csv > ./src/main/resources/data.json "
+  },
+  "dependencies": {
+    "csvtojson": "^1.1.4"
+  }
+}
