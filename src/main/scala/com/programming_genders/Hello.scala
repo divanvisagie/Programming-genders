@@ -18,7 +18,7 @@ object Hello {
 
   def drawBarGraph(dataSet: DefaultCategoryDataset): Unit = {
     val chart = BarChart(dataSet,stacked = true,threeDimensional = true)
-    chart.show("Diversity according to programming language")
+    chart.saveAsPNG("./output.png")
   }
 
   def readCsvManually: Unit = {

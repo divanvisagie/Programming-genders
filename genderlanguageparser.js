@@ -35,7 +35,7 @@ const countedData = data
     })
 
     const filteredArray = arrData.filter(x => {
-        return (["Scala","C#","Java", "Rust", "Clojure", "Haskell", "JavaScript", "Python"].includes(x.language))
+        return (["Go","Scala","C#","Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
     })
 
     const csvdata = filteredArray.map(x => {
