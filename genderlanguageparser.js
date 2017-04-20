@@ -26,8 +26,6 @@ const countedData = data
 
     }, {})
 
-    //console.log(countedData)
-
     const arrData = Object.keys(countedData).map(key => {
         return {
             language: key,
@@ -36,13 +34,9 @@ const countedData = data
         }
     })
 
-   // console.log(arrData)
-
     const filteredArray = arrData.filter(x => {
         return (["Scala","C#","Java"].includes(x.language))
     })
-
-    console.log(filteredArray)
 
     const csvdata = filteredArray.map(x => {
         return `${x.language},${x.male},${x.female}`
@@ -50,14 +44,7 @@ const countedData = data
 
     console.log(csvdata)
 
-//    .map(x => `${x.gender},${x.tech_do},${x.tech_want}`)
-//
 fs.writeFile('./src/main/resources/genderlang.csv', csvdata.join('\n'), (err) => {
    if (err) throw err
    console.log("File saved")
 })
-
-//fs.writeFile('message.txt', 'Hello Node.js', (err) => {
-//  if (err) throw err;
-//  console.lo('The file has been saved!');
-//});

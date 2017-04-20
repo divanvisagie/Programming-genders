@@ -21,20 +21,6 @@ object Hello {
     chart.show("Diversity according to programming language")
   }
 
-  def demoBar: Unit = {
-
-      val dataArray = Array(
-        ProgrammerCount("Women","Scala",5),
-        ProgrammerCount("Men","Scala",7),
-
-        ProgrammerCount("Men","C#",13),
-        ProgrammerCount("Women","C#",4)
-      )
-
-      drawBarGraph(graphDataSetFromCount(dataArray))
-  }
-
-
   def readCsvManually: Unit = {
     var bufferedSource = io.Source.fromResource("genderlang.csv")
 
@@ -45,19 +31,24 @@ object Hello {
       })
       .map(line => line.split(","))
       .map(columns => {
-        (columns(0),columns(1),columns(2))
+        val men = columns(1).toInt * 1.0
+        val women = columns(2).toInt * 1.0
+
+        val total = men + women
+
+        val menperc = men/total * 100
+        val womenperc = women/total * 100
+        println(s"men $men - ${menperc} women $women - ${womenperc}")
+        (columns(0),menperc.toInt,womenperc.toInt)
       }).toArray
 
-    //println(filteredData)
 
-
-
+    filteredData.foreach(println)
 
     bufferedSource.close
 
-    val dataArray = filteredData.map(x => List(ProgrammerCount("Women",x._1,x._3.toInt), ProgrammerCount("Men",x._1,x._2.toInt)))
+    val dataArray = filteredData.map(x => List(ProgrammerCount("Women",x._1,x._3), ProgrammerCount("Men",x._1,x._2)))
       .flatten
-
 
     val dataset = graphDataSetFromCount(dataArray)
     drawBarGraph(dataset)
@@ -67,9 +58,5 @@ object Hello {
 
   def main(args: Array[String]): Unit = {
    readCsvManually
-
-
-
-    //val result = Parser.parse[Person](csv)
   }
 }

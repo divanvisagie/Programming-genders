@@ -6,7 +6,7 @@
   "author": "Divan Visagie <me@dvisagie.com>",
   "license": "MIT",
   "scripts" : {
-    "process": "csvtojson ./src/main/resources/2016_StackOverflow_Data.csv > ./src/main/resources/data.json "
+    "process": "csvtojson parse --headers \"./data/2016\\ Stack\\ Overflow\\ Survey\\Results/2016\\ Stack\\ Overflow\\ Survey\\ Responses.csv\" > ./data/rawdata.json"
   },
   "dependencies": {
     "csvtojson": "^1.1.4"
