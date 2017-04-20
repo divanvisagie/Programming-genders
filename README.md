@@ -7,3 +7,13 @@ This is my attempt at an analysis of the situation of women in tech.
 ## Language Distribution
 ![Chart](./output.png)
 
+## Usage
+
+Add the following to ~/.sbt/0.13/plugins/plugins.sbt
+
+```scala
+addSbtPlugin("org.ensime" % "sbt-ensime" % "1.12.9")
+```
+
+#### Editor Config
+`sbt ensimeConfig`
