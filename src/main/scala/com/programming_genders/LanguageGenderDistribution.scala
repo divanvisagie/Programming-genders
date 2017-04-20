@@ -2,12 +2,9 @@ package com.programming_gender
 
 import com.programming_genders.GenderGroup
 
-import scalax.chart.api._
-import org.jfree.data.category._
-
 class LanguageGenderDistribution {
     def getData(): Array[GenderGroup] = {
-        var bufferedSource = io.Source.fromResource("genderlang.csv")
+        var bufferedSource = io.Source.fromFile("./data/genderlang.csv")
 
         val filteredData = bufferedSource.getLines()
         .map(x => {
@@ -31,8 +28,7 @@ class LanguageGenderDistribution {
 
         bufferedSource.close
         
-        filteredData.map(x => List(GenderGroup("Women",x._1,x._3), GenderGroup("Men",x._1,x._2)))
-        .flatten
+        filteredData.flatMap(x => List(GenderGroup("Women", x._1, x._3), GenderGroup("Men", x._1, x._2)))
     } 
 
 }

@@ -6,7 +6,9 @@
   "author": "Divan Visagie <me@dvisagie.com>",
   "license": "MIT",
   "scripts" : {
-    "process": "csvtojson parse --headers \"./data/2016\\ Stack\\ Overflow\\ Survey\\Results/2016\\ Stack\\ Overflow\\ Survey\\ Responses.csv\" > ./data/rawdata.json"
+    "process": "sh convert_to_json.sh",
+    "build": "node genderlanguageparser.js",
+    "postinstall": "mkdir data; sh extract.sh; sh convert_to_json.sh"
   },
   "dependencies": {
     "csvtojson": "^1.1.4"
