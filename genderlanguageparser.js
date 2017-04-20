@@ -11,27 +11,24 @@ const countedData = data
         }
     }).reduce((acc, item) => {
 
-        item.tech_do.forEach(tech => {
-            if (!acc[tech]) {
-                acc[tech] = { male: 0 , female: 0 }
-            }
-            if (item.gender) {
-                if (item.gender.toLowerCase() == "male" || item.gender.toLowerCase() == "female") {
-                    acc[tech][item.gender.toLowerCase()] += 1
+
+        ["tech_do", "tech_want"].forEach(columnName => {
+            item[columnName].forEach(tech => {
+                if (!acc[tech]) {
+                    acc[tech] = { male: 0 , female: 0, other: 0, undisclosed: 0 }
                 }
-            }
+                if (item.gender) {
+                    if (item.gender.toLowerCase() === "male" || item.gender.toLowerCase() === "female") {
+                        acc[tech][item.gender.toLowerCase()] += 1
+                    } else if (item.gender.toLowerCase() === "other") {
+                        acc[tech].other += 1
+                    } else {
+                        acc[tech].undisclosed += 1
+                    }
+                }
+            })
         })
 
-        item.tech_want.forEach(tech => {
-            if (!acc[tech]) {
-                acc[tech] = { male: 0 , female: 0 }
-            }
-            if (item.gender) {
-                if (item.gender.toLowerCase() == "male" || item.gender.toLowerCase() == "female") {
-                    acc[tech][item.gender.toLowerCase()] += 1
-                }
-            }
-        })
 
         return acc
 
@@ -41,7 +38,9 @@ const arrData = Object.keys(countedData).map(key => {
     return {
         language: key,
         male: countedData[key].male,
-        female: countedData[key].female
+        female: countedData[key].female,
+        other: countedData[key].other,
+        undisclosed: countedData[key].undisclosed
     }
 })
 
@@ -50,7 +49,7 @@ const filteredArray = arrData.filter(x => {
 })
 
 const csvdata = filteredArray.map(x => {
-    return `${x.language},${x.male},${x.female}`
+    return `${x.language},${x.male},${x.female},${x.other},${x.undisclosed}`
 })
 
 console.log(csvdata)
