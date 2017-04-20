@@ -6,10 +6,11 @@ import org.jfree.data.category._
 import zamblauskas.csv.parser._
 import zamblauskas.functional._
 
-object Hello {
-  case class ProgrammerCount(gender: String, language: String, count: Int)
+case class GenderGroup(gender: String, language: String, count: Int)
 
-  def graphDataSetFromCount(dataSet: Array[ProgrammerCount]): DefaultCategoryDataset = {
+object Main {
+
+  def graphDataSetFromCount(dataSet: Array[GenderGroup]): DefaultCategoryDataset = {
     val ds = new DefaultCategoryDataset
     dataSet.foreach(x => ds.addValue(x.count, x.gender,x.language))
     ds
@@ -47,7 +48,7 @@ object Hello {
 
     bufferedSource.close
 
-    val dataArray = filteredData.map(x => List(ProgrammerCount("Women",x._1,x._3), ProgrammerCount("Men",x._1,x._2)))
+    val dataArray = filteredData.map(x => List(GenderGroup("Women",x._1,x._3), GenderGroup("Men",x._1,x._2)))
       .flatten
 
     val dataset = graphDataSetFromCount(dataArray)
