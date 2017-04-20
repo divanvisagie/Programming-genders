@@ -26,23 +26,23 @@ const countedData = data
 
     }, {})
 
-    const arrData = Object.keys(countedData).map(key => {
-        return {
-            language: key,
-            male: countedData[key].male,
-            female: countedData[key].female
-        }
-    })
+const arrData = Object.keys(countedData).map(key => {
+    return {
+        language: key,
+        male: countedData[key].male,
+        female: countedData[key].female
+    }
+})
 
-    const filteredArray = arrData.filter(x => {
-        return (["Go","Scala","C#","Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
-    })
+const filteredArray = arrData.filter(x => {
+    return (["Go","Scala","C#","Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
+})
 
-    const csvdata = filteredArray.map(x => {
-        return `${x.language},${x.male},${x.female}`
-    })
+const csvdata = filteredArray.map(x => {
+    return `${x.language},${x.male},${x.female}`
+})
 
-    console.log(csvdata)
+console.log(csvdata)
 
 fs.writeFile('./src/main/resources/genderlang.csv', csvdata.join('\n'), (err) => {
    if (err) throw err

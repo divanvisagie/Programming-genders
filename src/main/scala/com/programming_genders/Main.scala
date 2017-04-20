@@ -1,8 +1,9 @@
 package com.programming_genders
 
+import com.programming_gender.LanguageGenderDistribution
+
 import scalax.chart.api._
 import org.jfree.data.category._
-
 import zamblauskas.csv.parser._
 import zamblauskas.functional._
 
@@ -17,44 +18,15 @@ object Main {
   }
 
 
-  def drawBarGraph(dataSet: DefaultCategoryDataset): Unit = {
+  def drawBarGraph(dataSet: DefaultCategoryDataset, path: String): Unit = {
     val chart = BarChart(dataSet,stacked = true,threeDimensional = true)
-    chart.saveAsPNG("./output.png")
+    chart.saveAsPNG(path)
   }
 
   def readCsvManually: Unit = {
-    var bufferedSource = io.Source.fromResource("genderlang.csv")
-
-    val filteredData = bufferedSource.getLines()
-      .map(x => {
-        println(x)
-        x
-      })
-      .map(line => line.split(","))
-      .map(columns => {
-        val men = columns(1).toInt * 1.0
-        val women = columns(2).toInt * 1.0
-
-        val total = men + women
-
-        val menperc = men/total * 100
-        val womenperc = women/total * 100
-        println(s"men $men - ${menperc} women $women - ${womenperc}")
-        (columns(0),menperc.toInt,womenperc.toInt)
-      }).toArray
-
-
-    filteredData.foreach(println)
-
-    bufferedSource.close
-
-    val dataArray = filteredData.map(x => List(GenderGroup("Women",x._1,x._3), GenderGroup("Men",x._1,x._2)))
-      .flatten
-
+    val dataArray = LanguageGenderDistribution().getData()
     val dataset = graphDataSetFromCount(dataArray)
-    drawBarGraph(dataset)
-
-    println(s"Filtered pure data contains: ${filteredData.length} participants")
+    drawBarGraph(dataset, "./charts/languageGenderDistribution.png")
   }
 
   def main(args: Array[String]): Unit = {
