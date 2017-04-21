@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts" : {
     "process": "sh convert_to_json.sh",
-    "build": "node genderlanguageparser.js",
+    "build": "node parsers/genderlanguageparser.js ; node parsers/genderoperatingsystemparser.js",
     "postinstall": "mkdir data; sh extract.sh; sh convert_to_json.sh"
   },
   "dependencies": {
