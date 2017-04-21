@@ -17,7 +17,6 @@ object Main {
     ds
   }
 
-
   def drawBarGraph(dataSet: DefaultCategoryDataset, path: String): Unit = {
     val chart = BarChart(dataSet,stacked = true,threeDimensional = true)
     chart.saveAsPNG(path)

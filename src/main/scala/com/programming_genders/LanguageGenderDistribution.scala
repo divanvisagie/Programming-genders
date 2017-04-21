@@ -29,7 +29,6 @@ class LanguageGenderDistribution {
             val otherperc       = other/total * 100
             val undisclosedperc = other/total * 100
 
-            //println(s"men $men - ${menperc} women $women - ${womenperc}")
             (columns(0),menperc.toInt,womenperc.toInt,otherperc.toInt, undisclosedperc.toInt)
         })
         groupData(filteredData)

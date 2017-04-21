@@ -11,11 +11,15 @@ const countedData = data
         }
     }).reduce((acc, item) => {
 
-
         ["tech_do", "tech_want"].forEach(columnName => {
             item[columnName].forEach(tech => {
                 if (!acc[tech]) {
-                    acc[tech] = { male: 0 , female: 0, other: 0, undisclosed: 0 }
+                    acc[tech] = {
+                        male: 0,
+                        female: 0,
+                        other: 0,
+                        undisclosed: 0
+                    }
                 }
                 if (item.gender) {
                     if (item.gender.toLowerCase() === "male" || item.gender.toLowerCase() === "female") {
@@ -45,7 +49,7 @@ const arrData = Object.keys(countedData).map(key => {
 })
 
 const filteredArray = arrData.filter(x => {
-    return (["Go","Scala","C#","Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
+    return (["Go", "Scala", "C#", "Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
 })
 
 const csvdata = filteredArray.map(x => {
@@ -55,6 +59,6 @@ const csvdata = filteredArray.map(x => {
 console.log(csvdata)
 
 fs.writeFile('./data/genderlang.csv', csvdata.join('\n'), (err) => {
-   if (err) throw err
-   console.log("File saved")
+    if (err) throw err
+    console.log("File saved")
 })
