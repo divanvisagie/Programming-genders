@@ -23,13 +23,11 @@ object Main {
     chart.saveAsPNG(path)
   }
 
-  def readCsvManually: Unit = {
-    val dataArray = LanguageGenderDistribution().getData()
-    val dataset = graphDataSetFromCount(dataArray)
-    drawBarGraph(dataset, "./charts/languageGenderDistribution.png")
-  }
-
   def main(args: Array[String]): Unit = {
-   readCsvManually
+    val genderPercentageDataset = graphDataSetFromCount(LanguageGenderDistribution().getPercentageData())
+    drawBarGraph(genderPercentageDataset, "./charts/languageGenderPercentageDistribution.png")
+
+    val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().getData())
+    drawBarGraph(genderDataset, "./charts/languageGenderDistribution.png")
   }
 }
