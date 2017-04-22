@@ -5,7 +5,7 @@ import com.programming_genders.GenderGroup
 trait CSVReader {
     def csvPath: String
 
-    def readCSV(): Array[Array[String]] = {
+    def readCSVToArray(): Array[Array[String]] = {
         val bufferedSource = io.Source.fromFile(csvPath)
         val lines = bufferedSource.getLines().toArray
         bufferedSource.close

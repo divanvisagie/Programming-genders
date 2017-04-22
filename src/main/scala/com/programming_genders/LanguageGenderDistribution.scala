@@ -6,7 +6,7 @@ class LanguageGenderDistribution extends CSVReader with GenderGraph {
     val csvPath = "./data/genderlang.csv"
 
     def percentageData: Array[GenderGroup] = {
-        val filteredData = readCSV()
+        val filteredData = readCSVToArray()
         .map(columns => {
             val men         = columns(1).toInt * 1.0
             val women       = columns(2).toInt * 1.0
@@ -26,7 +26,7 @@ class LanguageGenderDistribution extends CSVReader with GenderGraph {
     } 
 
     def data: Array[GenderGroup] = {
-        val data = readCSV()
+        val data = readCSVToArray()
             .map(columns => {
                 (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
             })
