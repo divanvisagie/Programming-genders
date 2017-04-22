@@ -20,7 +20,7 @@ trait CSVReader {
 trait GenderGraph {
     type GenderTuple = (String, Int, Int, Int, Int)
 
-    def readCSV(): Array[Array[String]]
+    def readCSVToArray(): Array[Array[String]]
 
     def data: Array[GenderGroup]
 
@@ -34,7 +34,7 @@ trait GenderGraph {
     }
 
     def columns: Array[GenderTuple] = {
-        readCSV()
+        readCSVToArray()
             .map(columns => {
                 (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
             })

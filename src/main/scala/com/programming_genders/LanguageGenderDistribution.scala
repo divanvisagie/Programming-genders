@@ -26,11 +26,11 @@ class LanguageGenderDistribution extends CSVReader with GenderGraph {
     } 
 
     def data: Array[GenderGroup] = {
-        val data = readCSVToArray()
-            .map(columns => {
-                (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
-            })
-        flattenData(data)
+//        val data = readCSVToArray()
+//            .map(columns => {
+//                (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
+//            })
+        flattenData(columns)
     }
 
 }
