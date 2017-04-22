@@ -17,10 +17,6 @@ const csvBody = filteredData.map(x => {
 
 var csvFileContent = [csvHeader, csvBody].join('/n');
 
-//console.log(csvFileContent)
-
-console.log(csvHeader)
-
 fs.writeFile('./data/clean.csv', csvFileContent , err => {
     if (err) throw err
     console.log('Wrote File')
