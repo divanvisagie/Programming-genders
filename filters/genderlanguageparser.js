@@ -11,7 +11,10 @@ const countedData = data
         }
     }).reduce((acc, item) => {
 
-        ["tech_do", "tech_want"].forEach(columnName => {
+        [
+            "tech_do",
+            "tech_want"
+        ].forEach(columnName => {
             item[columnName].forEach(tech => {
                 if (!acc[tech]) {
                     acc[tech] = {
@@ -49,7 +52,14 @@ const arrData = Object.keys(countedData).map(key => {
 })
 
 const filteredArray = arrData.filter(x => {
-    return (["Go", "Scala", "C#", "Java", "Rust", "CSS", "C++", "JavaScript", "Python"].includes(x.language))
+    return ([
+        "C#", 
+        "Java", 
+        "C", 
+        "C++", 
+        "JavaScript", 
+        "Python"
+     ].includes(x.language))
 })
 
 const csvdata = filteredArray.map(x => {
