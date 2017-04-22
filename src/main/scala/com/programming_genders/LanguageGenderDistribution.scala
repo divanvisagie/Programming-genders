@@ -2,19 +2,10 @@ package com.programming_gender
 
 import com.programming_genders.GenderGroup
 
-class LanguageGenderDistribution {
-    def readCSV(): Array[Array[String]] = {
-        var bufferedSource = io.Source.fromFile("./data/genderlang.csv")
-        val lines = bufferedSource.getLines().toArray
-        bufferedSource.close
-        lines.map(x => {
-            println(x)
-            x
-        })
-        .map(line => line.split(","))
-    }
+class LanguageGenderDistribution extends CSVReader with GenderGrouper {
+    val csvPath = "./data/genderlang.csv"
 
-    def getPercentageData(): Array[GenderGroup] = {
+    def percentageData(): Array[GenderGroup] = {
         val filteredData = readCSV()
         .map(columns => {
             val men         = columns(1).toInt * 1.0
@@ -34,21 +25,12 @@ class LanguageGenderDistribution {
         groupData(filteredData)
     } 
 
-    def getData(): Array[GenderGroup] = {
+    def data(): Array[GenderGroup] = {
         val data = readCSV()
             .map(columns => {
                 (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
             })
         groupData(data)    
-    }
-
-    def groupData(data: Array[Tuple5[String,Int,Int,Int,Int]]) : Array[GenderGroup] = {
-         data.flatMap(x => List(
-            GenderGroup("Women", x._1, x._3),
-            GenderGroup("Men", x._1, x._2),
-            GenderGroup("Other",x._1,x._4),
-            GenderGroup("Undisclosed",x._1,x._5)
-        ))
     }
 
 }

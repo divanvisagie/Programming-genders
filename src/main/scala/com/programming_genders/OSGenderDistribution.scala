@@ -2,32 +2,41 @@ package com.programming_gender
 
 import com.programming_genders.GenderGroup
 
-class OSGenderDistribution {
-    def readCSV(): Array[Array[String]] = {
-        var bufferedSource = io.Source.fromFile("./data/genderos.csv")
-        val lines = bufferedSource.getLines().toArray
-        bufferedSource.close
-        lines.map(x => {
-            print(x)
-            x
-        })
-        .map(line => line.split(","))
-    }
+import scala.collection.mutable
 
-    def getData(): Array[GenderGroup] = {
-        var data = readCSV()
+class OSGenderDistribution extends CSVReader with GenderGrouper {
+
+    val csvPath = "./data/genderos.csv"
+
+    def data(): Array[GenderGroup] = {
+        val data = readCSV()
             .map(columns => {
                 (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
             })
-        groupData(data)
-    }
+        val reducedData = data.foldLeft[mutable.Map[String,Tuple5[String,Int,Int,Int,Int]]](mutable.Map(
+            "OSX"     -> ("OSX",    0,0,0,0),
+            "Windows" -> ("Windows",0,0,0,0),
+            "Linux"   -> ("Linux",  0,0,0,0)
+        ))( (acc, distro) => {
+            val key = distro._1 match {
+                case s if Array("Mac OS X").contains(s) => "OSX"
+                case s if s.contains("Windows") => "Windows"
+                case _ => "Linux"
+            }
+            acc(key) = (
+              key,
+              acc(key)._2 + distro._2,
+              acc(key)._3 + distro._3,
+              acc(key)._4 + distro._4,
+              acc(key)._5 + distro._5
+            )
+            acc
+        }).values.toArray
 
-    def groupData(data: Array[Tuple5[String,Int,Int,Int,Int]]) : Array[GenderGroup] = {
-         data.flatMap(x => List(
-            GenderGroup("Women", x._1, x._3),
-            GenderGroup("Men", x._1, x._2),
-            GenderGroup("Other",x._1,x._4),
-            GenderGroup("Undisclosed",x._1,x._5)
-        ))
+        groupData(reducedData)
     }
+}
+
+object OSGenderDistribution {
+    def apply(): OSGenderDistribution = new OSGenderDistribution()
 }

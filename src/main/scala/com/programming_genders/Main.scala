@@ -1,6 +1,6 @@
 package com.programming_genders
 
-import com.programming_gender.LanguageGenderDistribution
+import com.programming_gender.{LanguageGenderDistribution, OSGenderDistribution}
 
 import scalax.chart.api._
 import org.jfree.data.category._
@@ -23,10 +23,13 @@ object Main {
   }
 
   def main(args: Array[String]): Unit = {
-    val genderPercentageDataset = graphDataSetFromCount(LanguageGenderDistribution().getPercentageData())
+    val genderPercentageDataset = graphDataSetFromCount(LanguageGenderDistribution().percentageData())
     drawBarGraph(genderPercentageDataset, "./charts/languageGenderPercentageDistribution.png")
 
-    val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().getData())
+    val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().data())
     drawBarGraph(genderDataset, "./charts/languageGenderDistribution.png")
+
+    val genderOSDataset = graphDataSetFromCount(OSGenderDistribution().data())
+    drawBarGraph(genderOSDataset, "./charts/osGenderDistribution.png")
   }
 }
