@@ -23,13 +23,16 @@ object Main {
   }
 
   def main(args: Array[String]): Unit = {
-    val genderPercentageDataset = graphDataSetFromCount(LanguageGenderDistribution().percentageData())
+    val genderPercentageDataset = graphDataSetFromCount(LanguageGenderDistribution().percentageData)
     drawBarGraph(genderPercentageDataset, "./charts/languageGenderPercentageDistribution.png")
 
-    val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().data())
+    val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().data)
     drawBarGraph(genderDataset, "./charts/languageGenderDistribution.png")
 
-    val genderOSDataset = graphDataSetFromCount(OSGenderDistribution().data())
+    val genderOSDataset = graphDataSetFromCount(OSGenderDistribution().data)
     drawBarGraph(genderOSDataset, "./charts/osGenderDistribution.png")
+
+    val genderOSPercentageDataset = graphDataSetFromCount(OSGenderDistribution().percentageData)
+    drawBarGraph(genderOSPercentageDataset, "./charts/osGenderPercentageDistribution.png")
   }
 }

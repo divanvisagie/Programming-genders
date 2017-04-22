@@ -4,16 +4,15 @@ import com.programming_genders.GenderGroup
 
 import scala.collection.mutable
 
-class OSGenderDistribution extends CSVReader with GenderGrouper {
+
+class OSGenderDistribution extends CSVReader with GenderGraph {
 
     val csvPath = "./data/genderos.csv"
 
-    def data(): Array[GenderGroup] = {
-        val data = readCSV()
-            .map(columns => {
-                (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
-            })
-        val reducedData = data.foldLeft[mutable.Map[String,Tuple5[String,Int,Int,Int,Int]]](mutable.Map(
+    type CountedGenderTuple = (String, Int, Int, Int, Int, Int)
+
+    private def reduceDistros(distros: Array[GenderTuple]): Array[GenderTuple] = {
+        distros.foldLeft[mutable.Map[String,GenderTuple]](mutable.Map(
             "OSX"     -> ("OSX",    0,0,0,0),
             "Windows" -> ("Windows",0,0,0,0),
             "Linux"   -> ("Linux",  0,0,0,0)
@@ -32,8 +31,31 @@ class OSGenderDistribution extends CSVReader with GenderGrouper {
             )
             acc
         }).values.toArray
+    }
 
-        groupData(reducedData)
+    def data: Array[GenderGroup] = {
+        val data = reduceDistros(columns)
+        flattenData(data)
+    }
+
+    def percentageData: Array[GenderGroup] = {
+        val data =  reduceDistros(columns)
+        val percData = data.map(x => {
+            val men         = x._2 * 1.0
+            val women       = x._3 * 1.0
+            val other       = x._4 * 1.0
+            val undisclosed = x._5 * 1.0
+
+            val total = men + women + other + undisclosed
+
+            val menperc         = men/total   * 100
+            val womenperc       = women/total * 100
+            val otherperc       = other/total * 100
+            val undisclosedperc = other/total * 100
+
+            (x._1,menperc.toInt,womenperc.toInt,otherperc.toInt, undisclosedperc.toInt)
+        })
+        flattenData(percData)
     }
 }
 
