@@ -30,6 +30,8 @@ yarn build
 sbt run
 ```
 
+The output is the set of chart pngs generated in the `./chart` directory
+
 
 #### Editor Config
 
