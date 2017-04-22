@@ -19,6 +19,9 @@ Raw Headcount is fine but I wanted to see which genders made up which portion of
 Here I have done the same thing with the usage of operating systems
 ![Chart](./charts/osGenderDistribution.png)
 
+And here are the percentages represented in a graph
+![Chart](./charts/osGenderPercentageDistribution.png)
+
 ## Usage
 
 ```sh
