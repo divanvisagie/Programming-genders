@@ -1,11 +1,12 @@
 package com.programming_genders
 
 import com.programming_gender.{LanguageGenderDistribution, OSGenderDistribution}
-
 import java.io.File
+
+import kantan.csv
+
 import scalax.chart.api._
 import org.jfree.data.category._
-
 import kantan.csv._
 import kantan.csv.ops._
 import kantan.csv.generic._
@@ -41,20 +42,41 @@ class Grapher {
 
 
 
+
 object Main {
 
+    def readRawResponse() : CsvReader[ReadResult[RawResponseRow]] = {
+        new File("./data/2016 Stack Overflow Survey Results/2016 Stack Overflow Survey Responses.csv")
+          .asCsvReader[RawResponseRow](rfc.withHeader)
+    }
 
+    def genderLanguageReader(): Unit = {
+        readRawResponse()
+            .filter(_.exists(x => {
+                !x.gender.isEmpty && !x.techDo.isEmpty && !x.techWant.isEmpty
+            }))
+            .mapResult(f => (
+                f.gender,
+                f.techDo.split(';').map(_.trim),
+                f.techWant.split(';').map(_.trim)
+            ))
+            .foreach {
+                case Success(r: (String,Array[String],Array[String])) => println(s"${r._1}")
+                case _ => println("Invalid Row")
+            }
+    }
 
-    def main(args: Array[String]): Unit = {
-        val iterator = new File("./data/2016 Stack Overflow Survey Results/2016 Stack Overflow Survey Responses.csv")
-                .asCsvReader[RawResponseRow](rfc.withHeader)
-
-        iterator
+    def testReader(): Unit = {
+        readRawResponse()
             .filter(_.exists(!_.country.isEmpty))
             .mapResult(f => f)
             .foreach {
                 case Success(r: RawResponseRow) => println(s"${r.id} |${r.country} | ${r.gender} | ${r.jobSatisfaction} | ${r.googleInterviewLikelihood}")
                 case _ => println("Invalid Row")
             }
+    }
+
+    def main(args: Array[String]): Unit = {
+        genderLanguageReader()
     }
 }

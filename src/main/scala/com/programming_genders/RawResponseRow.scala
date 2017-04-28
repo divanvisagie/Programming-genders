@@ -46,3 +46,4 @@ case class RawResponseRow(
        googleInterviewLikelihood: String,
        howToImproveInterviewProcess: String
     )
+
