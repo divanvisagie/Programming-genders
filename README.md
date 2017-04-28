@@ -25,8 +25,7 @@ And here are the percentages represented in a graph
 ## Usage
 
 ```sh
-yarn
-yarn build
+./extract.sh
 sbt run
 ```
 

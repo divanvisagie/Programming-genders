@@ -1,38 +1,66 @@
 package com.programming_gender
 
-import com.programming_genders.GenderGroup
+import com.programming_genders.{BarGraphGroup, CSVReader}
+import kantan.csv._
+import kantan.csv.ops._
 
-class LanguageGenderDistribution extends CSVReader with GenderGraph {
-    val csvPath = "./data/genderlang.csv"
+import scala.collection.mutable
 
-    def percentageData: Array[GenderGroup] = {
-        val filteredData = readCSVToArray()
-        .map(columns => {
-            val men         = columns(1).toInt * 1.0
-            val women       = columns(2).toInt * 1.0
-            val other       = columns(3).toInt * 1.0
-            val undisclosed = columns(4).toInt * 1.0
+class LanguageGenderDistribution extends CSVReader {
+    def defaultFilters = Array("Java","C#","JavaScript","C++", "C", "Python")
 
-            val total = men + women + other + undisclosed
+    def data(filters: Array[String] = defaultFilters): Array[BarGraphGroup] = {
+        case class GenderCount(var male: Int, var female: Int, var other: Int, var undisclosed: Int)
 
-            val menperc         = men/total   * 100
-            val womenperc       = women/total * 100
-            val otherperc       = other/total * 100
-            val undisclosedperc = other/total * 100
+        val counter = mutable.Map[String,GenderCount]()
 
-            (columns(0),menperc.toInt,womenperc.toInt,otherperc.toInt, undisclosedperc.toInt)
-        })
-        flattenData(filteredData)
-    } 
-
-    def data: Array[GenderGroup] = {
-//        val data = readCSVToArray()
-//            .map(columns => {
-//                (columns(0),columns(1).toInt, columns(2).toInt, columns(3).toInt, columns(4).toInt)
-//            })
-        flattenData(columns)
+        readRawResponse()
+            .filter(_.exists(x => {
+                !x.gender.isEmpty && !x.techDo.isEmpty && !x.techWant.isEmpty
+            }))
+            .mapResult(f => (
+                f.gender,
+                f.techDo.split(';').map(_.trim),
+                f.techWant.split(';').map(_.trim)
+            ))
+            .foldLeft(counter)((acc,x) => {
+                x match {
+                    case Success(r) =>
+                        r._2.foreach(tech => {
+                            if (!acc.keys.toArray.contains(tech)) acc += (tech -> GenderCount(0,0,0,0))
+                            r._1 match {
+                                case "Male" => acc(tech).male += 1
+                                case "Female" => acc(tech).female += 1
+                                case "Other" => acc(tech).other += 1
+                                case _ => acc(tech).undisclosed += 1
+                            }
+                        })
+                        r._3.foreach(tech => {
+                            if (!acc.keys.toArray.contains(tech)) acc += (tech -> GenderCount(0,0,0,0))
+                            r._1 match {
+                                case "Male" => acc(tech).male += 1
+                                case "Female" => acc(tech).female += 1
+                                case "Other" => acc(tech).other += 1
+                                case _ => acc(tech).undisclosed += 1
+                            }
+                        })
+                    case _ => println("Error Occurred")
+                }
+                acc
+            })
+            .filter(x => {
+                filters.contains(x._1)
+            })
+            .flatMap(x => {
+                val (key, value) = x
+                List(
+                    BarGraphGroup("Women", key, value.female),
+                    BarGraphGroup("Men", key, value.male),
+                    BarGraphGroup("Other", key, value.other),
+                    BarGraphGroup("Undisclosed", key, value.undisclosed)
+                )
+            }).toArray
     }
-
 }
 object LanguageGenderDistribution {
     def apply(): LanguageGenderDistribution = new LanguageGenderDistribution()
