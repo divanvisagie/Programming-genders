@@ -1,6 +1,5 @@
-package com.programming_genders
+package com.stack_overflow_data_analysis
 
-import com.programming_gender.LanguageGenderDistribution
 import java.io.File
 
 import kantan.csv
@@ -31,7 +30,7 @@ class Grapher {
         val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().data())
         drawBarGraph(genderDataset, "./charts/languageGenderDistribution.png")
 
-        val functionalFilters = Array("Haskell","Rust","Scala","Clojure")
+        val functionalFilters = Array("Haskell","Rust","Scala","Clojure", "F#","R")
         val functionalGenderDataSet = graphDataSetFromCount(LanguageGenderDistribution().data(functionalFilters))
         drawBarGraph(functionalGenderDataSet,"./charts/functionalLanguageGenderDistribution.png")
     }

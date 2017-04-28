@@ -1,4 +1,4 @@
-package com.programming_genders
+package com.stack_overflow_data_analysis
 
 
 case class RawResponseRow(

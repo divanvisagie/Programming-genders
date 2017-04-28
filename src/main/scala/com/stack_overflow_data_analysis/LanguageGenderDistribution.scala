@@ -1,6 +1,6 @@
-package com.programming_gender
+package com.stack_overflow_data_analysis
 
-import com.programming_genders.{BarGraphGroup, CSVReader}
+import com.stack_overflow_data_analysis.{BarGraphGroup, CSVReader}
 import kantan.csv._
 import kantan.csv.ops._
 
@@ -49,6 +49,7 @@ class LanguageGenderDistribution extends CSVReader {
                 acc
             })
             .filter(x => {
+                println(x._1)
                 filters.contains(x._1)
             })
             .flatMap(x => {
