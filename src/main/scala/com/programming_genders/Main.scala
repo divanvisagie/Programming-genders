@@ -43,26 +43,17 @@ class Grapher {
 
 object Main {
 
-    final case class Response(
-       id:Int,
-       collector: String,
-       country: String,
-       subRegion: String,
-       region: String,
-       ageRange: String,
-       ageMidPoint: Double,
-       gender: String
-    )
+
 
     def main(args: Array[String]): Unit = {
         val iterator = new File("./data/2016 Stack Overflow Survey Results/2016 Stack Overflow Survey Responses.csv")
-                .asCsvReader[Response](rfc.withHeader)
+                .asCsvReader[RawResponseRow](rfc.withHeader)
 
         iterator
             .filter(_.exists(!_.country.isEmpty))
             .mapResult(f => f)
             .foreach {
-                case Success(r: Response) => println(s"${r.id} |${r.country} | ${r.gender}")
+                case Success(r: RawResponseRow) => println(s"${r.id} |${r.country} | ${r.gender} | ${r.jobSatisfaction} | ${r.googleInterviewLikelihood}")
                 case _ => println("Invalid Row")
             }
     }
