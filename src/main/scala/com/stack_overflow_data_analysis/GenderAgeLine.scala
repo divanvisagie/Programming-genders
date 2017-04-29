@@ -45,7 +45,7 @@ class GenderAgeLine extends CSVReader {
                 println(f)
                 f
             })
-            .toArray
+            .toArray.sortBy(_.y)
     }
 }
 object GenderAgeLine {
