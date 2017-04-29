@@ -26,7 +26,7 @@ class BarGrapher {
     }
 }
 
-case class LineGraphItem(label: String,x: Double, y: Double)
+
 
 class LinePlotter {
     val ATTENTION = "Attention"
