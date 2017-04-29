@@ -40,7 +40,12 @@ class GenderAgeLine extends CSVReader {
                 ageCounter.keys.map(key => {
                     LineGraphItem(gender,ageCounter(key),key)
                 })
-            }).toArray  
+            })
+            .map(f => {
+                println(f)
+                f
+            })
+            .toArray
     }
 }
 object GenderAgeLine {
