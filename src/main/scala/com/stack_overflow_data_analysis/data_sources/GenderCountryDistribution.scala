@@ -37,7 +37,7 @@ class GenderCountryDistribution extends CSVReader {
                 acc
             })
             .filter(x => {
-                x._2.male > 1000
+                (x._2.male + x._2.female + x._2.other + x._2.undisclosed) > 1000
             })
             .flatMap(x => {
                 val (key, value) = x
