@@ -1,6 +1,8 @@
-package com.stack_overflow_data_analysis
+package com.stack_overflow_data_analysis.graphers
 
+import com.stack_overflow_data_analysis.LineGraphItem
 import org.jfree.data.category.DefaultCategoryDataset
+
 import scalax.chart.api._
 
 class LinePlotter {

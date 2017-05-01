@@ -1,6 +1,9 @@
-package com.stack_overflow_data_analysis
+package com.stack_overflow_data_analysis.graphers
 
+import com.stack_overflow_data_analysis.BarGraphGroup
+import com.stack_overflow_data_analysis.data_sources.LanguageGenderDistribution
 import org.jfree.data.category.DefaultCategoryDataset
+
 import scalax.chart.api._
 
 class BarGrapher {

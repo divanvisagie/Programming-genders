@@ -1,6 +1,6 @@
-package com.stack_overflow_data_analysis
+package com.stack_overflow_data_analysis.data_sources
 
-import com.stack_overflow_data_analysis.{BarGraphGroup, CSVReader}
+import com.stack_overflow_data_analysis.{CSVReader, LineGraphItem}
 import kantan.csv._
 import kantan.csv.ops._
 

@@ -1,4 +1,4 @@
-package com.stack_overflow_data_analysis
+package com.stack_overflow_data_analysis.data_sources
 
 import com.stack_overflow_data_analysis.{BarGraphGroup, CSVReader}
 import kantan.csv._
