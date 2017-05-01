@@ -23,14 +23,14 @@ class BarGrapher {
 
     def draw(): Unit = {
         val genderDataset = graphDataSetFromCount(LanguageGenderDistribution().data())
-        drawBarGraph(genderDataset, "./charts/languageGenderDistribution")
+        drawBarGraph(genderDataset, "./docs/charts/languageGenderDistribution")
 
         val functionalFilters = Array("Haskell","Rust","Scala","Clojure", "F#","R")
         val functionalGenderDataSet = graphDataSetFromCount(LanguageGenderDistribution().data(functionalFilters))
-        drawBarGraph(functionalGenderDataSet,"./charts/functionalLanguageGenderDistribution")
+        drawBarGraph(functionalGenderDataSet,"./docs/charts/functionalLanguageGenderDistribution")
 
         val genderCountryData = graphDataSetFromCount(GenderCountryDistribution().data())
-        drawBarGraph(genderCountryData, "./charts/genderCountryDistribution")
+        drawBarGraph(genderCountryData, "./docs/charts/genderCountryDistribution")
     }
 }
 

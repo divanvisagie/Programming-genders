@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Stack Overflow Data Analysis</title>
+        <style>
+            body {
+                text-align: center;
+                font-family: Gotham Rounded A,Gotham Rounded B,Helvetica Neue,Arial,sans-serif;
+                color: #4d5359;
+            }
+            .wrapper {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .content {
+                text-align:left;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-family: Gotham Rounded A,Gotham Rounded B,Helvetica Neue,Arial,sans-serif;
+                font-weight: 300;
+                letter-spacing: -.1rem;
+                margin-bottom: 2.0rem;
+                margin-top: 0;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+        <div class="content">
+            <h1>Graphs for data</h1>
+
+            <h2>Gender</h2>
+
+            <h3>Language Usage</h3>
+
+            <p>
+                The first thing I wanted to do was chart the gender distribution inside each programming language.
+                This is just the raw headcount.
+                I wanted to measure interest not just usage, so I have taken from both tech_want and tech_do columns for this data
+            </p>
+
+            <img src="charts/languageGenderDistribution.svg" />
+
+            <p>
+                Here is another showing functional languages. It is worth noting that this is from a smaller data pool
+            </p>
+
+            <img src="charts/functionalLanguageGenderDistribution.svg" />
+
+            <h3>Median Ages</h3>
+
+            <p>
+                Line showing median ages of all survey participants
+            </p>
+
+            <img src="charts/genderAgeLine.svg" />
+        </div>
+        </div>
+    </body>
+</html>

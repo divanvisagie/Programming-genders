@@ -27,6 +27,6 @@ class LinePlotter {
     def draw(): Unit = {
 
         val genderDataSet = graphDataFromGroup(GenderAgeLine().data())
-        drawLineGraph(genderDataSet,"./charts/genderAgeLine")
+        drawLineGraph(genderDataSet,"./docs/charts/genderAgeLine")
     }
 }
