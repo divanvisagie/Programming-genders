@@ -17,8 +17,7 @@ class BarGrapher {
     def drawBarGraph(dataSet: DefaultCategoryDataset, path: String): Unit = {
         val chart = BarChart(dataSet,stacked = true,threeDimensional = true)
 
-        chart.saveAsPNG(s"$path.png", (1000,600))
-        chart.saveAsSVG(s"$path.svg")
+        chart.saveAsSVG(s"$path.svg", (800,500))
     }
 
     def draw(): Unit = {
