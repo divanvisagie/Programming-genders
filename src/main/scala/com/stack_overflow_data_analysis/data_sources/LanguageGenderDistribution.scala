@@ -6,11 +6,13 @@ import kantan.csv.ops._
 
 import scala.collection.mutable
 
+
+
+
 class LanguageGenderDistribution extends CSVReader {
     def defaultFilters = Array("Java","C#","JavaScript","C++", "C", "Python")
 
     def data(filters: Array[String] = defaultFilters): Array[BarGraphGroup] = {
-        case class GenderCount(var male: Int, var female: Int, var other: Int, var undisclosed: Int)
 
         val counter = mutable.Map[String,GenderCount]()
 

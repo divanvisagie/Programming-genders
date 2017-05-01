@@ -20,12 +20,13 @@ class LinePlotter {
 
     def drawLineGraph(dataSet: DefaultCategoryDataset, path: String): Unit = {
         val chart = LineChart(dataSet,threeDimensional = false)
-        chart.saveAsPNG(path)
+        chart.saveAsPNG(s"$path.png")
+        chart.saveAsSVG(s"$path.svg")
     }
 
     def draw(): Unit = {
 
         val genderDataSet = graphDataFromGroup(GenderAgeLine().data())
-        drawLineGraph(genderDataSet,"./charts/genderAgeLine.png")
+        drawLineGraph(genderDataSet,"./charts/genderAgeLine")
     }
 }
