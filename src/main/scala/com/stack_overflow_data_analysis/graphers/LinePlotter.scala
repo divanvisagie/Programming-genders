@@ -20,7 +20,7 @@ class LinePlotter {
 
     def drawLineGraph(dataSet: DefaultCategoryDataset, path: String): Unit = {
         val chart = LineChart(dataSet,threeDimensional = false)
-        chart.saveAsPNG(s"$path.png")
+        chart.saveAsPNG(s"$path.png", (1000,600))
         chart.saveAsSVG(s"$path.svg")
     }
 
