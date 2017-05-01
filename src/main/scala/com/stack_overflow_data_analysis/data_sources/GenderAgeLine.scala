@@ -1,6 +1,6 @@
 package com.stack_overflow_data_analysis.data_sources
 
-import com.stack_overflow_data_analysis.{CSVReader, LineGraphItem}
+import com.stack_overflow_data_analysis.models.LineGraphItem
 import kantan.csv._
 import kantan.csv.ops._
 
