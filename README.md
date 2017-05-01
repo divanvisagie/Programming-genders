@@ -10,17 +10,17 @@ This is just a basic analysis of Stack Overflow survey data that plots things I 
 
 The first thing I wanted to do was chart the gender distribution inside each programming language. This is just the raw headcount. I wanted to measure interest not just usage, so I have taken from both tech_want and tech_do columns for this data
 
-![Chart](./charts/languageGenderDistribution.svg)
+![Chart](./charts/languageGenderDistribution.png)
 
 Here is another showing functional languages.These sample from a much smaller pool
 
-![Chart](./charts/functionalLanguageGenderDistribution.svg)
+![Chart](./charts/functionalLanguageGenderDistribution.png)
 
 #### Median Ages
 
 Line showing median ages of all survey participants
 
-![Chart](./charts/genderAgeLine.svg)
+![Chart](./charts/genderAgeLine.png)
 
 
 
