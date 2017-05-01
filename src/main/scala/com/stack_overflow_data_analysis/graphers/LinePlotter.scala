@@ -1,5 +1,6 @@
 package com.stack_overflow_data_analysis.graphers
 
+import com.stack_overflow_data_analysis.data_sources.GenderAgeLine
 import com.stack_overflow_data_analysis.models.LineGraphItem
 import org.jfree.data.category.DefaultCategoryDataset
 
