@@ -41,11 +41,17 @@ class GenderCountryDistribution extends CSVReader {
             })
             .flatMap(x => {
                 val (key, value) = x
+
+                val keyToUse = key match {
+                    case "United Kingdom" => "U.K"
+                    case s: String => s
+                }
+
                 List(
-                    BarGraphGroup("Women", key, value.female),
-                    BarGraphGroup("Men", key, value.male),
-                    BarGraphGroup("Other", key, value.other),
-                    BarGraphGroup("Undisclosed", key, value.undisclosed)
+                    BarGraphGroup("Women", keyToUse, value.female),
+                    BarGraphGroup("Men", keyToUse, value.male),
+                    BarGraphGroup("Other", keyToUse, value.other),
+                    BarGraphGroup("Undisclosed", keyToUse, value.undisclosed)
                 )
             }).toArray
     }
