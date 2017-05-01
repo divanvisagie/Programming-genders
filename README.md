@@ -13,7 +13,14 @@ The first thing I wanted to do was chart the gender distribution inside each pro
 ![Chart](./charts/languageGenderDistribution.png)
 
 Here is another showing functional languages.These sample from a much smaller pool
+
 ![Chart](./charts/functionalLanguageGenderDistribution.png)
+
+#### Median Ages
+
+Line showing median ages of all survey participants
+
+![Chart](./charts/genderAgeLine.png)
 
 
 
